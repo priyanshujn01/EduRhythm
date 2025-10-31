@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduRhythm | Study Timer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background video: place a nature video file at assets/nature.mp4 or change the src to your video -->
+  <!-- Canvas for anime-style animation + clock -->
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <!-- UI canvas sits above the app so drawn UI (timer) is sharp and not blurred by backdrop-filter -->
+  <canvas id="uiCanvas" aria-hidden="true"></canvas>
+  <video id="bgVideo" autoplay muted loop playsinline aria-hidden="true">
+    <source src="assets/nature.mp4" type="video/mp4" />
+    <!-- Fallback: if no local file, you may replace the src above with a hosted mp4/webm URL -->
+  </video>
+  <div class="video-overlay" aria-hidden="true"></div>
+  <!-- Background selector: allows switching among multiple background types -->
+  <div id="bgTypeControls" aria-label="Background type selector">
+     <!-- Removed background type selector buttons -->
+  </div>
+  <div id="bgControls" aria-label="Background selector">
+    <button id="prevBg" title="Previous background">◀</button>
+    <span id="bgLabel">Nature</span>
+    <button id="nextBg" title="Next background">▶</button>
+  </div>
+  <button id="toggleLayout" class="layout-toggle" title="Toggle container style">📦</button>
+  <div class="app">
+    <h1 class="title">🎓 EduRhythm</h1>
+    <p class="subtitle">Stay focused. Study smart.</p>
+
+    <div class="timer-circle">
+      <svg>
+        <circle cx="100" cy="100" r="90"></circle>
+        <circle id="progress" cx="100" cy="100" r="90"></circle>
+      </svg>
+      <!-- keep the HTML timer for accessibility, but visually hide it because the canvas will render the visible timer -->
+      <div class="timer-display sr-only" id="timer" aria-live="polite">25:00</div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">Start</button>
+      <button id="pauseBtn">Pause</button>
+      <button id="resetBtn">Reset</button>
+    </div>
+
+    <div class="set-time">
+      <label for="minutes">Set Minutes:</label>
+      <input type="number" id="minutes" min="1" max="120" value="25" />
+    </div>
+
+    <div class="quote-container">
+      <p id="quote" class="quote">"Discipline is the bridge between goals and achievement."</p>
+      <button id="nextQuote" class="next-quote-btn" title="Next quote">▶</button>
+    </div>
+  </div>
+
+  <!-- Optional: tiny beep sound -->
+  <!-- <audio id="alarm" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio> -->
+
+  <script src="script.js"></script>
+</body>
+</html>
